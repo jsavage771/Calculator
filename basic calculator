@@ -4,7 +4,8 @@
 int main() 
 {
 	char operator; // Going to use charecter for assginment 
-	float int1, int2, result = 0; // We are going to assgint the values int1, int2, and result 
+	float int1, int2, result = 0; // We are going to assign values to the int1, int2, and result 
+	
 
 	printf("\nEnter an operator +,-,*,/: ");// prompt user to select a operator remind them what an operator is
 	scanf_s("%c", &operator);// scaning in the opertor selected 
@@ -15,10 +16,15 @@ int main()
 	printf("\nEnter a number: ");//prompt user to enter a mumber
 	scanf_s("%f", &int2);// scan in the number of choice
 
+	float storage[3];//Created an array to store our variables
+	storage[0] = int1;//This element stores int 1
+	storage[1] = int2;//This element stores int 2
+	
+
 	switch (operator)// case scenarios for each opertor selection
 	{
 	case '+':// when the user selects addtion the following values will be passed into the function
-		result = int1 + int2;
+		result= int1 + int2;
 		break;
 	case '-':// when the user selects subtraction the following values will be passed into the function
 		result = int1 - int2;
@@ -35,10 +41,11 @@ int main()
 
 	default: 
 			printf("\nNot a valid operator");// Used if user selects something other than the 4 avaible operators. 
-
+			
 	}
-	
+	storage[2] = result;//This element stores the result
 	printf("\nThe result of %.2f %c %.2f =%.2f", int1, operator, int2, result);// passing the assgined values, performing the calculation, and showing the results. 
+	printf("\nArray storage numbers %.2f %.2f %.2f", storage[0], storage[1], storage[2]);// We are shoing what numbers we used and the result
 
 	return 0;
 
