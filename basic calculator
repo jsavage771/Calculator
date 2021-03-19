@@ -1,50 +1,57 @@
 #include <stdio.h> 
 /* We are using a standard input output*/
-
-int main() 
+struct numbers {
+	float int1;
+	float int2;
+	float result;
+};
+float main()
 {
+	struct numbers cal;
+	 cal.int1 = 0;
+	 cal.int2 = 0;
+	 cal.result = 0;
+
 	char operator; // Going to use charecter for assginment 
-	float int1, int2, result = 0; // We are going to assign values to the int1, int2, and result 
-	
 
 	printf("\nEnter an operator +,-,*,/: ");// prompt user to select a operator remind them what an operator is
 	scanf_s("%c", &operator);// scaning in the opertor selected 
 
 	printf("\nEnter a Number:");// prompt user to enter a number of choice
-	scanf_s("%f", &int1);// scan in the number
+	scanf_s("%f", &cal.int1);// scan in the number
 
 	printf("\nEnter a number: ");//prompt user to enter a mumber
-	scanf_s("%f", &int2);// scan in the number of choice
+	scanf_s("%f", &cal.int2);// scan in the number of choice
 
 	float storage[3];//Created an array to store our variables
-	storage[0] = int1;//This element stores int 1
-	storage[1] = int2;//This element stores int 2
-	
+	storage[0] = cal.int1;//This element stores int 1
+	storage[1] = cal.int2;//This element stores int 2
+
 
 	switch (operator)// case scenarios for each opertor selection
 	{
 	case '+':// when the user selects addtion the following values will be passed into the function
-		result= int1 + int2;
+		cal.result = cal.int1 + cal.int2;
 		break;
 	case '-':// when the user selects subtraction the following values will be passed into the function
-		result = int1 - int2;
+		cal.result = cal.int1 - cal.int2;
 		break;
 	case '*':// when the user selects mutiplication the following values will be passed into the function
-		result = int1 * int2;
+		cal.result = cal.int1 * cal.int2;
 		break;
 	case '/':// when the user selects division the following values will be passed into the function
-		if (int2 != 0)// if the user tries to divide by zero, then we will ge the message cannot divide by zero 
-			result = int1 / int2;
+		if (cal.int2 != 0)// if the user tries to divide by zero, then we will ge the message cannot divide by zero 
+			cal.result = cal.int1 / cal.int2;
 		else
 			printf("Cannot divide by zero");
 		break;
 
-	default: 
-			printf("\nNot a valid operator");// Used if user selects something other than the 4 avaible operators. 
-			
+	default:
+		printf("\nNot a valid operator");// Used if user selects something other than the 4 avaible operators. 
+
 	}
-	storage[2] = result;//This element stores the result
-	printf("\nThe result of %.2f %c %.2f =%.2f", int1, operator, int2, result);// passing the assgined values, performing the calculation, and showing the results. 
+	storage[2] = cal.result;//This element stores the result
+	printf("\nThe result of %.2f %c %.2f =%.2f", cal.int1, operator, cal.int2, cal.result);// passing the assgined values, performing the calculation, and showing the results. 
 	printf("\nArray storage numbers %.2f %.2f %.2f", storage[0], storage[1], storage[2]);// We are shoing what numbers we used and the result
 
 	return 0;
