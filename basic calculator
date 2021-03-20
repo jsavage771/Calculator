@@ -1,14 +1,14 @@
 #include <stdio.h> 
 /* We are using a standard input output*/
-struct numbers {
+struct numbers {//created this structure for my variables to be passed as memebers 
 	float int1;
 	float int2;
 	float result;
 };
 float main()
 {
-	struct numbers cal;
-	 cal.int1 = 0;
+	struct numbers cal;// used cal to give the members values. 
+	 cal.int1 = 0; //set these values to zero so that they can be inputted by the user
 	 cal.int2 = 0;
 	 cal.result = 0;
 
@@ -27,21 +27,34 @@ float main()
 	storage[0] = cal.int1;//This element stores int 1
 	storage[1] = cal.int2;//This element stores int 2
 
+	float doAdd(float cal.int1, float cal.int2) {// created this function so that it can be called/found in the switch case 
+		return cal.int1 + float cal.int2;
+	}
+	float doSub(float cal.int1, float cal.int2) {//same as above
+		return cal.int1 - float cal.int2;
+	}
+	float doMult(float cal.int1, float cal.int2) {//same as above
+		return cal.int1 * cali.int2;
+	}
+	float doDiv(float cal.int1, float cal.int2) {//same as above
+		return float cal.int1 / float cal.int2;
+	}
+
 
 	switch (operator)// case scenarios for each opertor selection
 	{
 	case '+':// when the user selects addtion the following values will be passed into the function
-		cal.result = cal.int1 + cal.int2;
+		cal.result = doAdd(cal.int1,cal.int2);
 		break;
 	case '-':// when the user selects subtraction the following values will be passed into the function
-		cal.result = cal.int1 - cal.int2;
+		cal.result = doSub(cal.int1,cal.int2);
 		break;
 	case '*':// when the user selects mutiplication the following values will be passed into the function
-		cal.result = cal.int1 * cal.int2;
+		cal.result = doMult(cal.int1, cal.int2);
 		break;
 	case '/':// when the user selects division the following values will be passed into the function
 		if (cal.int2 != 0)// if the user tries to divide by zero, then we will ge the message cannot divide by zero 
-			cal.result = cal.int1 / cal.int2;
+			cal.result = doDiv(cal.int1,cal.int2);
 		else
 			printf("Cannot divide by zero");
 		break;
