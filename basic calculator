@@ -1,12 +1,29 @@
-#include <stdio.h> 
-/* We are using a standard input output*/
-struct numbers {   //created this structure for my variables to be passed as memebers 
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct numbers //created this structure for my variables to be passed as memebers 
+{
 	float int1;
 	float int2;
 	float result;
 };
-float main()
+
+void copy_files(FILE* in, FILE* out)//main for getting in file and placing it in out file
 {
+	int c;
+
+	while ((c = getc(in)) != EOF)// get in file
+		putc(c, out);// place in file text in out file 
+};
+
+
+float main(int argc, char *argv[])//using int argc, and pointer charater argv array
+{
+
+	FILE* in, * out; // varibales for file in an dout
+	errno_t err;// err variable
+
 	struct numbers cal;// used cal to give the members values. 
 	cal.int1 = 0; //set these values to zero so that they can be inputted by the user
 	cal.int2 = 0;
@@ -17,11 +34,14 @@ float main()
 	printf("\nEnter an operator +,-,*,/: ");// prompt user to select a operator remind them what an operator is
 	scanf_s("%c", &operator);// scaning in the opertor selected 
 
+
+
 	printf("\nEnter a Number:");// prompt user to enter a number of choice
 	scanf_s("%f", &cal.int1);// scan in the number
 
 	printf("\nEnter a number: ");//prompt user to enter a mumber
 	scanf_s("%f", &cal.int2);// scan in the number of choice
+
 
 	float storage[3];//Created an array to store our variables
 	storage[0] = cal.int1;//This element stores int 1
@@ -33,10 +53,10 @@ float main()
 		cal.result = cal.int1 + cal.int2;
 		break;
 	case '-':// when the user selects subtraction the following values will be passed into the function
-		cal.result =cal.int1 - cal.int2;
+		cal.result = cal.int1 - cal.int2;
 		break;
 	case '*':// when the user selects mutiplication the following values will be passed into the function
-		cal.result =cal.int1 * cal.int2;
+		cal.result = cal.int1 * cal.int2;
 		break;
 	case '/':// when the user selects division the following values will be passed into the function
 		if (cal.int2 != 0)// if the user tries to divide by zero, then we will ge the message cannot divide by zero 
@@ -51,8 +71,29 @@ float main()
 	}
 	storage[2] = cal.result;//This element stores the result
 	printf("\nThe result of %.2f %c %.2f =%.2f", cal.int1, operator, cal.int2, cal.result);// passing the assgined values, performing the calculation, and showing the results. 
-	printf("\nArray storage numbers %.2f %.2f %.2f", storage[0], storage[1], storage[2]);// We are shoing what numbers we used and the result
+	printf("\nArray storage numbers %.2f %.2f %.2f", storage[0], storage[1], storage[2]);// We are showing what numbers we used and the result
 
+	if (argc != 3)
+	{
+		fprintf(stderr, "Please enter two files name.\n");//promt to enter two file names
+		return 1;
+	}
+
+	if ((err = fopen_s(&in, argv[1], "r")) != 0)// use this find in file to read from 
+	{
+		fprintf(stderr, "Can't read from input file %s.\n", argv[1]);// Cant find in file
+		return 2;
+	}
+	if ((err = fopen_s(&out, argv[2], "w")) != 0)// To make and write the file in file out
+	{
+		fprintf(stderr, "Can't write to output file %s. \n", argv[2]);// display this message if unsucessful
+		return 3;
+	}
+	copy_files(in, out); //Copy files
+	printf("\nFile has been copied.");//Message that files have been copied
+
+	fclose(in);// Close in file
+	fclose(out);// Close out file
+	
 	return 0;
-
 }
